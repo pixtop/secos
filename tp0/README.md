@@ -41,6 +41,11 @@ Par défaut, les fichiers de TP permettent d'accéder à un objet global pré-in
 
 **Pourquoi le noyau indique `0x302010` et pas `0x300000` comme adresse de début ? Indice: essayer de comprendre linker.lds, regardez également le code de "entry.s"**
 
+#### Réponse
+
+linker.lds initialise 2 segments avant celui du noyau :
+- 1 segment pour le boot sur 16 octets
+- 1 segment pour la pile sur 8192 octets
 ---
 
 ### Question 2
@@ -53,8 +58,16 @@ Par défaut, les fichiers de TP permettent d'accéder à un objet global pré-in
 
 **Vous allez découvrir différentes zones de mémoire physique, certaines étant réservées, d'autres libres. Déclarez un pointeur d'entier par exemple et initialisez le avec une des adresses que vous avez trouvée. Essayez de lire/écrire la mémoire à cette adresse. Que se passe-t-il ? Avez-vous un "segmentation fault" ? Pourquoi ?**
 
+#### Réponse
+
+Les adresses sont accessibles en lecture et écriture et ne génèrent aucun "segmentation fault" car il n'y a pas de mécanisme de segmentation sur la mémoire physique.
+
 ---
 
 ### Question 4
 
 **Essayez de lire/écrire en dehors de la RAM disponible (128MB). Que se passe-t-il ?**
+
+#### Réponse
+
+Il est impossible d'écrire et de lire (valeur 0) sur les adresses au delà de 128MB. 
